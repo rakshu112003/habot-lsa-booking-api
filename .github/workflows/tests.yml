@@ -12,23 +12,16 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: habot_test
+          POSTGRES_DB: habot_lsa_booking_db
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
         ports:
           - 5432:5432
         options: >-
-          --health-cmd="pg_isready -U postgres -d habot_test"
-          --health-interval=10s
+          --health-cmd="pg_isready -U postgres -d habot_lsa_booking_db"
+          --health-interval=5s
           --health-timeout=5s
-          --health-retries=5
-
-    env:
-      DB_NAME: habot_test
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_HOST: 127.0.0.1
-      DB_PORT: 5432
+          --health-retries=10
 
     steps:
       - name: Checkout code
